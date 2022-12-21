@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper 
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd"> 
+
+<mapper namespace="com.spring.practice04.mapper.AccountMapper"> 
+
+	<resultMap id="infoResult"  type="InfoVO">
+		<id column="no" property="no"/>
+		<result column="b_no" property="b_no"/>
+		<result column="p_no" property="p_no"/>
+		<result column="c_no" property="c_no"/>
+		<result column="amount" property="amount"/>
+		<result column="regdate" property="regdate"/>
+		<association property="categoryList" column="c_no" javaType="CategoryVO">
+			<id column="no" property="no"/>
+			<result column="name" property="name"/>
+		</association>
+	</resultMap>
+	
+	<insert id="insert" parameterType="InfoVO">
+		INSERT INTO 
+		<choose>
+			<when test="'income'.equalsIgnoreCase(type)">
+				income VALUES(income_seq.nextval
+			</when>
+			<when test="'expend'.equalsIgnoreCase(type)">
+				expend VALUES(expend_seq.nextval
+			</when>
+		</choose> 
+		,#{b_no}, #{p_no}, #{c_no}, #{amount}, #{regdate})
+	</insert>
+	
+	<update id="updateTotalAmount" parameterType="InfoVO">
+		UPDATE bank
+		<choose>
+			<when test="'income'.equalsIgnoreCase(type)">
+				SET amount = amount + #{amount}
+			</when>
+			<when test="'expend'.equalsIgnoreCase(type)">
+				SET amount = amount - #{amount}
+			</when>
+		</choose> 
+		WHERE no = #{b_no}
+	</update>
+
+	<select id="list" resultMap="infoResult">
+		SELECT *
+		FROM
+		<choose>
+			<when test="'income'.equalsIgnoreCase(type)">
+				income JOIN category
+				ON income.c_no = category.no
+			</when>
+			<when test="'expend'.equalsIgnoreCase(type)">
+				expend JOIN category
+				ON expend.c_no = category.no
+			</when>
+		</choose> 
+		WHERE b_no = #{bank} AND
+		regdate BETWEEN TO_DATE(#{start}) AND TO_DATE(#{end})
+		ORDER BY regdate
+	</select>
+	
+	<select id="selectTotalAmount" resultType="HashMap">
+		SELECT NVL(i_amount, 0) i_amount, NVL(e_amount, 0) e_amount,NVL(amount, 0) t_amount
+		FROM 
+		    (SELECT b_no, SUM(amount) i_amount 
+		     FROM income 
+		     WHERE regdate BETWEEN TO_DATE(#{start}) AND TO_DATE(#{end})
+		     group by b_no) i
+		FULL OUTER JOIN 
+		    (SELECT b_no, SUM(amount) e_amount 
+		     FROM expend 
+		     WHERE regdate BETWEEN TO_DATE(#{start}) AND TO_DATE(#{end})
+		     group by b_no) e
+		ON i.b_no = e.b_no
+		FULL OUTER JOIN  
+		    bank b
+		ON i.b_no = b.no
+		WHERE b.no = #{bank}
+	</select>
+	
+	<select id="memberBankInfo" resultType="BankVO">
+		SELECT *
+		FROM bank
+		WHERE member_id = #{id}
+	</select>
+	
+	<select id="categoryList" resultType="CategoryVO">
+		select *
+		from category
+	</select>
+	
+	<delete id="delete">
+		DELETE
+		<choose>
+			<when test="'income'.equalsIgnoreCase(type)">
+				FROM income
+			</when>
+			<when test="'expend'.equalsIgnoreCase(type)">
+				FROM expend
+			</when>
+		</choose> 
+		WHERE no = #{no}
+	</delete>
+</mapper>

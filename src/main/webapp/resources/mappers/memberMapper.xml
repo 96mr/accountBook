@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper 
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd"> 
+
+<mapper namespace="com.spring.practice04.mapper.MemberMapper"> 
+
+	<insert id="register" parameterType="MemberVO">
+		INSERT ALL
+			INTO member(id, password) VALUES(#{id}, #{password})
+			INTO bank(no, member_id) VALUES(bank_seq.nextval, #{id})
+		SELECT * FROM DUAL
+	</insert>
+
+	<select id="login"  resultType="MemberVO"> 
+		select *
+		from member
+		where id = #{id}
+	</select> 
+	
+	<select id="idCnt" parameterType="String" resultType="int">
+		select count(*)
+		from member
+		where id = #{id}
+	</select>
+</mapper>
