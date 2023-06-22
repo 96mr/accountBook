@@ -1,5 +1,8 @@
 package com.spring.practice04.service;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 import javax.inject.Inject;
 
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -39,10 +42,24 @@ public class MemberServiceImpl implements MemberService {
 		}
 		return 0;
 	}
-
+	
 	@Override
-	public int idCnt(String id) throws Exception {
-		return dao.idCnt(id);
+	public int regexId(String id) throws Exception{
+		String idReg = "^[a-z0-9]{4,20}$";
+		Pattern p = Pattern.compile(idReg);
+		Matcher m = p.matcher(id);
+		if(!m.matches()) return 0;
+		
+		if(dao.idCnt(id) != 0 ) return -1;
+		return 1;
 	}
-
+	
+	@Override
+	public int regexPassword(String password) throws Exception{
+		String pwReg = "^[a-z0-9]{8,30}$";
+		Pattern p = Pattern.compile(pwReg);
+		Matcher m = p.matcher(password);
+		if(!m.matches()) return 0;
+		return 1;
+	}
 }

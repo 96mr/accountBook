@@ -4,8 +4,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import javax.servlet.http.HttpSession;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -26,8 +24,7 @@ public class AccountServiceImpl implements AccountService {
 	}
 
 	@Override
-	public void insert(InfoVO vo, HttpSession session) throws Exception {
-		String id = (String) session.getAttribute("sessionID");
+	public void insert(InfoVO vo, String id) throws Exception {
 		int bank = dao.memberBankInfo(id).getNo();
 		vo.setB_no(bank);
 		dao.insert(vo);

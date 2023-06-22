@@ -55,7 +55,8 @@ public class AccountController {
 						HttpSession session) throws Exception {
 		if(binding.hasErrors())
 			return "/account/add";
-		service.insert(info, session);
+		String id = (String) session.getAttribute("sessionID");
+		service.insert(info, id);
 		return "redirect:/account/calendar";
 	}
 	

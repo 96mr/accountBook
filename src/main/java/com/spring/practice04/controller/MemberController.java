@@ -1,8 +1,5 @@
 package com.spring.practice04.controller;
 
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
 import javax.inject.Inject;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
@@ -55,23 +52,15 @@ public class MemberController {
 	@ResponseBody
 	@RequestMapping(value = "/idChk", method = RequestMethod.POST)
 	public int idCheck(@RequestBody String id) throws Exception {	
-		String idReg = "^[a-z0-9]{4,20}$";
-		Pattern p = Pattern.compile(idReg);
-		Matcher m = p.matcher(id);
-		if(!m.matches()) return 0;
-		
-		if(service.idCnt(id) != 0 ) return -1;
-		return 1;
+		int result = service.regexId(id);
+		return result;
 	}
 	
 	@ResponseBody
 	@RequestMapping(value = "/pwChk", method = RequestMethod.POST)
 	public int pwCheck(@RequestBody String password) throws Exception {
-		String pwReg = "^[a-z0-9]{8,30}$";
-		Pattern p = Pattern.compile(pwReg);
-		Matcher m = p.matcher(password);
-		if(!m.matches()) return 0;
-		return 1;
+		int result = service.regexPassword(password);
+		return result;
 	}
 	
 	
