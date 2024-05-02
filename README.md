@@ -14,6 +14,7 @@
 
 ## Notion & Blog
 [Notion](https://spotty-gardenia-d4a.notion.site/75ec5ce7cea54fe7bb41c80ca8ffb10e?pvs=4)
+
 [Blog](https://cookie9606.tistory.com/53)
 
 ## 주요 기능
