@@ -23,6 +23,7 @@
     회원 관련 기능
   </summary>
   - 아이디 중복 확인 및 유효성 검사
+  
   - 비밀번호 유효성 검사 및 BCryptPasswordEncoder로 암호화
 </details>
 <details>
@@ -30,6 +31,7 @@
     데이터 추가
   </summary>
   - 현금/카드, 수입/지출, 카테고리, 날짜, 금액 입력
+  
   - 수입/지출 선택에 따라 카테고리 분류
 </details>
 <details>
@@ -37,7 +39,9 @@
     캘린더
   </summary>
   - FullCalender API 이용
+  
   - 잔액, 수입, 지출 금액 조회
+    
   - 해당 달의 (수입 또는 지출) 데이터 조회
 </details>
 <details>
@@ -45,7 +49,10 @@
     차트
   </summary>
     - Google Chart API 이용
+  
     - 잔액, 수입, 지출 금액 조회
+  
     - 해당 달의 (수입 또는 지출) 카테고리 별 비중을 원형차트로 표시
+    
     - 수입 또는 지출 리스트 (날짜, 카테고리, 금액) 조회
 </details>
