@@ -14,10 +14,6 @@
 ![Mybatis](https://img.shields.io/badge/MyBatis-000000?style=for-the-badge&logo=MyBatis&logoColor=white)
 
 ---
-## Notion & Blog
-[Notion](https://spotty-gardenia-d4a.notion.site/75ec5ce7cea54fe7bb41c80ca8ffb10e?pvs=4) [Blog](https://cookie9606.tistory.com/53)
-
----
 ## 주요 기능
 
 ### ✏ 데이터 추가
@@ -28,7 +24,12 @@
 - FullCalender API 이용
 - 수입 또는 지출 데이터 조회하여 캘린더에 표시
    
-### ✏ 카테고리 별 비중을 원형차트로 표시
+### ✏ 원형차트
 - Google Chart API 이용
 - 수입 또는 지출 카테고리 별 비중을 원형차트로 표시
 - 수입 또는 지출 리스트 (날짜, 카테고리, 금액) 조회
+ 
+---
+## 상세 내용
+[Notion](https://spotty-gardenia-d4a.notion.site/75ec5ce7cea54fe7bb41c80ca8ffb10e?pvs=4) 
+[Blog](https://cookie9606.tistory.com/53)
